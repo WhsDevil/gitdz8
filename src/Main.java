@@ -21,7 +21,21 @@ public class Main {
         list.add(new Person("Бертелеме","Жюльен де Тур Овернь",11));
         System.out.println("Список до сортировки");
         printList(list);
-        list.sort(new PersonComparator(3));
+        list.sort((Person o1, Person o2)->{
+            int firstCount = o1.getSurname().split(" ").length;
+            int secondCount = o2.getSurname().split(" ").length;
+            if (firstCount >= 3 && secondCount >= 3) {
+                return Integer.compare(o1.getAge(), o2.getAge());
+            } else {
+                if (firstCount > secondCount) {
+                    return 1;
+                } else if (firstCount < secondCount) {
+                    return -1;
+                } else {
+                    return Integer.compare(o1.getAge(), o2.getAge());
+                }
+            }
+        });
         System.out.println("Список после сортировки");
         printList(list);
     }
